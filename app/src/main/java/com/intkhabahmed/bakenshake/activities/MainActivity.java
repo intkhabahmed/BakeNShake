@@ -2,6 +2,7 @@ package com.intkhabahmed.bakenshake.activities;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.databinding.DataBindingUtil;
 import android.support.annotation.Nullable;
@@ -13,14 +14,14 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import com.intkhabahmed.bakenshake.R;
-import com.intkhabahmed.bakenshake.RecipeViewModel;
+import com.intkhabahmed.bakenshake.viewmodels.RecipeViewModel;
 import com.intkhabahmed.bakenshake.adapters.RecipeAdapter;
 import com.intkhabahmed.bakenshake.databinding.ActivityMainBinding;
 import com.intkhabahmed.bakenshake.models.RecipeResult;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements RecipeAdapter.ItemClickListener {
 
     private ActivityMainBinding mMainBinding;
     private RecipeAdapter mRecipeAdapter;
@@ -48,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupUi() {
-        mRecipeAdapter = new RecipeAdapter();
+        mRecipeAdapter = new RecipeAdapter(this);
         RecyclerView recyclerView = mMainBinding.recipesRv;
         RecyclerView.LayoutManager layoutManager;
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
@@ -61,5 +62,12 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(mRecipeAdapter);
+    }
+
+    @Override
+    public void onClick(RecipeResult recipe) {
+        Intent intent = new Intent(this, DetailActivity.class);
+        intent.putExtra(getString(R.string.recipe), recipe);
+        startActivity(intent);
     }
 }

@@ -1,4 +1,4 @@
-package com.intkhabahmed.bakenshake;
+package com.intkhabahmed.bakenshake.viewmodels;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;

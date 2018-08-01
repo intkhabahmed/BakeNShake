@@ -2,7 +2,9 @@ package com.intkhabahmed.bakenshake.models;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Step {
+import java.io.Serializable;
+
+public class Step implements Serializable{
     @SerializedName("id")
     private int stepId;
     @SerializedName("shortDescription")

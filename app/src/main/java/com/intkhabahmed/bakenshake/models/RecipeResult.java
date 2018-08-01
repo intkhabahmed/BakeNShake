@@ -9,11 +9,12 @@ import com.google.gson.annotations.SerializedName;
 import com.intkhabahmed.bakenshake.utils.IngredientTypeConverter;
 import com.intkhabahmed.bakenshake.utils.StepTypeConverter;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Entity(tableName = "recipes")
 @TypeConverters({IngredientTypeConverter.class, StepTypeConverter.class})
-public class RecipeResult {
+public class RecipeResult implements Serializable{
     @SerializedName("id")
     @ColumnInfo(name = "_id")
     @PrimaryKey
