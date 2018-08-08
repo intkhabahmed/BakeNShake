@@ -8,6 +8,9 @@ import android.util.Log;
 import com.intkhabahmed.bakenshake.models.RecipeResult;
 import com.intkhabahmed.bakenshake.network.ApiClient;
 import com.intkhabahmed.bakenshake.network.WebService;
+import com.intkhabahmed.bakenshake.utils.AppExecutors;
+import com.intkhabahmed.bakenshake.utils.Global;
+import com.intkhabahmed.bakenshake.utils.NetworkUtils;
 
 import java.util.List;
 
@@ -30,10 +33,19 @@ public class RecipeRepository {
 
     public LiveData<List<RecipeResult>> getRecipes() {
         final MutableLiveData<List<RecipeResult>> recipes = new MutableLiveData<>();
+        if (NetworkUtils.getConnectivityStatus(Global.getInstance())) {
+            return Global.getDbInstance().recipeDao().getAllRecipes();
+        }
         ApiClient.getInstance().create(WebService.class)
                 .getRecipes().enqueue(new Callback<List<RecipeResult>>() {
             @Override
-            public void onResponse(@NonNull Call<List<RecipeResult>> call, @NonNull Response<List<RecipeResult>> response) {
+            public void onResponse(@NonNull Call<List<RecipeResult>> call, @NonNull final Response<List<RecipeResult>> response) {
+                AppExecutors.getInstance().diskIO().execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        Global.getDbInstance().recipeDao().insertRecipes(response.body());
+                    }
+                });
                 recipes.setValue(response.body());
             }
 

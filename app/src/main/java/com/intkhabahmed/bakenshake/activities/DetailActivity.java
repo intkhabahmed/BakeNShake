@@ -4,39 +4,37 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.View;
+import android.support.v7.widget.Toolbar;
 
 import com.intkhabahmed.bakenshake.R;
 import com.intkhabahmed.bakenshake.databinding.ActivityDetailBinding;
+import com.intkhabahmed.bakenshake.fragments.RecipeDetailFragment;
 import com.intkhabahmed.bakenshake.models.RecipeResult;
 
 public class DetailActivity extends AppCompatActivity {
 
-    private ActivityDetailBinding mDetailBinding;
-    private RecipeResult mRecipe;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mDetailBinding = DataBindingUtil.setContentView(this, R.layout.activity_detail);
+        ActivityDetailBinding detailBinding = DataBindingUtil.setContentView(this, R.layout.activity_detail);
+        Toolbar toolbar = detailBinding.toolbar;
+        setSupportActionBar(toolbar);
         Intent intent = getIntent();
         if (intent != null && intent.hasExtra(getString(R.string.recipe))) {
-            mRecipe = (RecipeResult) intent.getSerializableExtra(getString(R.string.recipe));
-            setupUi();
+            RecipeResult recipe = intent.getParcelableExtra(getString(R.string.recipe));
+            RecipeDetailFragment recipeDetailFragment = new RecipeDetailFragment();
+            recipeDetailFragment.setRecipeResult(recipe);
+            if (savedInstanceState == null) {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(detailBinding.fragmentContainerFl.getId(), recipeDetailFragment, null)
+                        .commit();
+            }
         }
     }
 
-    private void setupUi() {
-        mDetailBinding.recipeNameTv.setText(mRecipe.getRecipeName());
-        mDetailBinding.servingsTv.setText(String.valueOf(mRecipe.getServings()));
-    }
-
-    public void showIngredients(View view) {
-        Log.v("Detail", "Ingredients clicked");
-    }
-
-    public void showSteps(View view) {
-        Log.v("Detail", "Steps clicked");
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(getString(R.string.recipe), 1);
     }
 }

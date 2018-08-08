@@ -5,19 +5,19 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.databinding.DataBindingUtil;
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import com.intkhabahmed.bakenshake.R;
-import com.intkhabahmed.bakenshake.viewmodels.RecipeViewModel;
 import com.intkhabahmed.bakenshake.adapters.RecipeAdapter;
 import com.intkhabahmed.bakenshake.databinding.ActivityMainBinding;
 import com.intkhabahmed.bakenshake.models.RecipeResult;
+import com.intkhabahmed.bakenshake.viewmodels.RecipeViewModel;
 
 import java.util.List;
 

@@ -1,8 +1,11 @@
 <resources>
-    <string name="app_name">BakeNShake</string>
+    <string name="app_name">Bake N\' Shake</string>
     <string name="recipe_name">Recipe Name :</string>
     <string name="servings">No of Servings :</string>
     <string name="ingredients">Ingredients</string>
     <string name="steps">Steps</string>
     <string name="recipe">Recipe</string>
+    <string name="next">Next</string>
+    <string name="prev">Prev</string>
+    <string name="player_current_position">Player current position</string>
 </resources>
