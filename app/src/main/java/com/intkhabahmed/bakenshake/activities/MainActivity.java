@@ -12,11 +12,14 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 
 import com.intkhabahmed.bakenshake.R;
 import com.intkhabahmed.bakenshake.adapters.RecipeAdapter;
 import com.intkhabahmed.bakenshake.databinding.ActivityMainBinding;
 import com.intkhabahmed.bakenshake.models.RecipeResult;
+import com.intkhabahmed.bakenshake.services.RecipeService;
+import com.intkhabahmed.bakenshake.utils.Global;
 import com.intkhabahmed.bakenshake.viewmodels.RecipeViewModel;
 
 import java.util.List;
@@ -40,9 +43,11 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.Ite
             @Override
             public void onChanged(@Nullable List<RecipeResult> recipeResults) {
                 if (recipeResults != null) {
+                    mMainBinding.mainPb.setVisibility(View.INVISIBLE);
                     mRecipeAdapter.setRecipes(recipeResults);
                 } else {
-                    Log.v("Recipe", "Empty result");
+                    mRecipeAdapter.setRecipes(null);
+                    mMainBinding.emptyViewContainer.setVisibility(View.VISIBLE);
                 }
             }
         });
@@ -50,6 +55,8 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.Ite
 
     private void setupUi() {
         mRecipeAdapter = new RecipeAdapter(this);
+        mMainBinding.mainPb.setVisibility(View.VISIBLE);
+        mMainBinding.emptyViewContainer.setVisibility(View.GONE);
         RecyclerView recyclerView = mMainBinding.recipesRv;
         RecyclerView.LayoutManager layoutManager;
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
@@ -68,6 +75,8 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapter.Ite
     public void onClick(RecipeResult recipe) {
         Intent intent = new Intent(this, DetailActivity.class);
         intent.putExtra(getString(R.string.recipe), recipe);
+        Global.saveLastOpenedRecipeid(recipe.getRecipeId());
+        RecipeService.startActionUpdateWidget(this);
         startActivity(intent);
     }
 }

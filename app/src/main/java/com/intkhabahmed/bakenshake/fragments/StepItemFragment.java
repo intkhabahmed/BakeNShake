@@ -3,8 +3,6 @@ package com.intkhabahmed.bakenshake.fragments;
 import android.content.res.Configuration;
 import android.databinding.DataBindingUtil;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -87,8 +85,6 @@ public class StepItemFragment extends Fragment {
                 if(savedInstanceState != null && savedInstanceState.getLong(getString(R.string.player_current_position)) != 0) {
                     player.seekTo(savedInstanceState.getLong(getString(R.string.player_current_position)));
                     player.setPlayWhenReady(true);
-                } else {
-                    player.setPlayWhenReady(false);
                 }
             } else {
                 mStepItemBinding.playerView.setVisibility(View.GONE);

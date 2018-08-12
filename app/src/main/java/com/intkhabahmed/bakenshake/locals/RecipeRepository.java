@@ -2,7 +2,9 @@ package com.intkhabahmed.bakenshake.locals;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
+import android.arch.lifecycle.Observer;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.intkhabahmed.bakenshake.models.RecipeResult;
@@ -12,6 +14,7 @@ import com.intkhabahmed.bakenshake.utils.AppExecutors;
 import com.intkhabahmed.bakenshake.utils.Global;
 import com.intkhabahmed.bakenshake.utils.NetworkUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -55,5 +58,9 @@ public class RecipeRepository {
             }
         });
         return recipes;
+    }
+
+    public LiveData<RecipeResult> getRecipeById(int recipeId) {
+        return Global.getDbInstance().recipeDao().getRecipeById(recipeId);
     }
 }

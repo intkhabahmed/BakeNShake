@@ -8,4 +8,11 @@
     <string name="next">Next</string>
     <string name="prev">Prev</string>
     <string name="player_current_position">Player current position</string>
+    <string name="add_widget">Add widget</string>
+    <string name="no_of_steps">No of Steps :</string>
+    <string name="widget_button_text">See Complete Recipe</string>
+    <string name="last_opened_recipe_id">recipe id</string>
+    <string name="default_last_opened_recipe_id">1</string>
+    <string name="no_of_servings">Servings :</string>
+    <string name="no_recipes">Sorry, No Recipes Available!</string>
 </resources>

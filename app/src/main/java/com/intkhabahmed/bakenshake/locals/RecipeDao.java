@@ -15,6 +15,9 @@ interface RecipeDao {
     @Query("SELECT * FROM recipes")
     LiveData<List<RecipeResult>> getAllRecipes();
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insertRecipes(List<RecipeResult> recipes);
+
+    @Query("SELECT * FROM recipes WHERE _id = :recipeId")
+    LiveData<RecipeResult> getRecipeById(int recipeId);
 }
