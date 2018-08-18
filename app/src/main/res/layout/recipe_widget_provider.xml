@@ -2,28 +2,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#09C"
+    android:background="#8f45a6"
     android:padding="@dimen/widget_margin">
-
-    <TextView
-        android:id="@+id/recipe_name_label_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:contentDescription="@string/recipe_name"
-        android:text="@string/recipe_name"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Title.Inverse" />
 
     <TextView
         android:id="@+id/recipe_name_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@id/recipe_name_label_tv"
-        android:layout_marginStart="16dp"
-        android:layout_toEndOf="@id/recipe_name_label_tv"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/large_spacing"
+        android:layout_marginStart="@dimen/large_spacing"
         android:contentDescription="@string/recipe_name"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium.Inverse"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Title.Inverse"
         tools:text="@string/recipe_name" />
 
 
@@ -32,9 +23,9 @@
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@id/recipe_name_label_tv"
+        android:layout_centerHorizontal="true"
         android:layout_below="@id/recipe_name_tv"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="@dimen/medium_spacing"
         android:text="@string/widget_button_text" />
 
     <TextView
@@ -42,9 +33,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@id/no_of_steps_tv"
-        android:layout_alignStart="@id/recipe_name_label_tv"
+        android:layout_centerHorizontal="true"
         android:layout_below="@id/show_detail_btn"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="@dimen/medium_spacing"
         android:text="@string/ingredients"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Title.Inverse" />
 
@@ -53,9 +44,9 @@
         android:id="@+id/ingredients_lv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@id/show_detail_btn"
         android:layout_below="@id/ingredients_label_tv"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="8dp" />
+        android:layout_marginStart="@dimen/large_spacing"
+        android:layout_marginEnd="@dimen/large_spacing"
+        android:layout_marginTop="@dimen/medium_spacing" />
 
 </RelativeLayout>

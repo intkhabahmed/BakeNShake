@@ -4,17 +4,74 @@
     xmlns:tool="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardCornerRadius="8dp"
-    app:cardElevation="8dp"
+    android:layout_marginEnd="@dimen/medium_spacing"
+    android:layout_marginStart="@dimen/medium_spacing"
+    app:cardCornerRadius="@dimen/card_radius"
+    app:cardElevation="@dimen/card_elevation"
     app:cardUseCompatPadding="true">
 
-    <TextView
-        android:id="@+id/recipe_name_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="48dp"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Display2"
-        tool:text="@tools:sample/first_names" />
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/recipe_name_tv"
+            android:layout_width="@dimen/no_spacing"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginEnd="@dimen/large_spacing"
+            android:layout_marginStart="@dimen/large_spacing"
+            android:layout_marginTop="@dimen/large_spacing"
+            android:gravity="center"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tool:text="@tools:sample/first_names" />
+
+        <TextView
+            android:id="@+id/servings_label_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/large_spacing"
+            android:text="@string/servings"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            app:layout_constraintStart_toStartOf="@+id/recipe_name_tv"
+            app:layout_constraintTop_toBottomOf="@+id/recipe_name_tv" />
+
+        <TextView
+            android:id="@+id/servings_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/medium_spacing"
+            android:layout_marginStart="@dimen/large_spacing"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:layout_constraintBaseline_toBaselineOf="@+id/servings_label_tv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/servings_label_tv"
+            tool:text="8" />
+
+        <TextView
+            android:id="@+id/steps_label_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/large_spacing"
+            android:layout_marginTop="@dimen/large_spacing"
+            android:text="@string/no_of_steps"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/servings_label_tv"
+            app:layout_constraintTop_toBottomOf="@+id/servings_label_tv" />
+
+        <TextView
+            android:id="@+id/steps_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:layout_constraintBaseline_toBaselineOf="@+id/steps_label_tv"
+            app:layout_constraintStart_toStartOf="@+id/servings_tv"
+            tool:text="8" />
+    </android.support.constraint.ConstraintLayout>
 
 </android.support.v7.widget.CardView>

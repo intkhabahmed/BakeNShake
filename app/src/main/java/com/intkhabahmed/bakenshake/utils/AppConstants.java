@@ -9,4 +9,6 @@ public interface AppConstants {
     String G = "G";
     String CUP = "CUP";
     String UNIT = "UNIT";
+
+    String IS_TWO_PANE = "two pane";
 }

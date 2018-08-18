@@ -47,6 +47,14 @@ public class StepItemFragment extends Fragment {
         this.mStep = mStep;
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (savedInstanceState != null) {
+            mStep = savedInstanceState.getParcelable(getString(R.string.steps));
+        }
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -58,9 +66,6 @@ public class StepItemFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        if (savedInstanceState != null) {
-            mStep = savedInstanceState.getParcelable(getString(R.string.steps));
-        }
         if (mStep != null) {
             mStepItemBinding.descriptionTv.setText(mStep.getDescription());
             mStepItemBinding.shortDescriptionTv.setText(mStep.getShortDescription());
@@ -75,7 +80,6 @@ public class StepItemFragment extends Fragment {
             }
             if (!TextUtils.isEmpty(mStep.getVideoUrl())) {
                 if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-                    ((DetailActivity)getActivity()).getSupportActionBar().hide();
                     getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                             WindowManager.LayoutParams.FLAG_FULLSCREEN);
                     mStepItemBinding.descriptionContainer.setVisibility(View.GONE);

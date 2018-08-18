@@ -10,7 +10,7 @@
         <View
             android:id="@+id/view"
             android:layout_width="match_parent"
-            android:layout_height="160dp"
+            android:layout_height="@dimen/diagonal_view_height"
             android:background="@drawable/wedged_shape_border"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -30,29 +30,15 @@
 
         <TextView
             android:id="@+id/next_step_tv"
-            android:layout_width="120dp"
-            android:layout_height="48dp"
-            android:layout_marginBottom="24dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
-            android:background="@color/colorAccent"
-            android:gravity="center"
+            style="@style/ControlButtonStyle"
             android:text="@string/next"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
         <TextView
             android:id="@+id/prev_step_tv"
-            android:layout_width="120dp"
-            android:layout_height="48dp"
-            android:layout_marginBottom="24dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginStart="16dp"
-            android:background="@color/colorAccent"
-            android:gravity="center"
+            style="@style/ControlButtonStyle"
             android:text="@string/prev"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -60,9 +46,8 @@
             android:id="@+id/no_of_steps_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
+            android:layout_marginBottom="@dimen/medium_spacing"
+            android:layout_marginEnd="@dimen/medium_spacing"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             app:layout_constraintBottom_toTopOf="@+id/next_step_tv"
             app:layout_constraintEnd_toStartOf="@+id/next_step_tv"

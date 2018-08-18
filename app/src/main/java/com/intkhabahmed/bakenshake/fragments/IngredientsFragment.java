@@ -38,6 +38,15 @@ public class IngredientsFragment extends Fragment {
         mRecipeName = recipeName;
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (savedInstanceState != null) {
+            mIngredients = savedInstanceState.getParcelableArrayList(getString(R.string.ingredients));
+            mRecipeName = savedInstanceState.getString(getString(R.string.recipe));
+        }
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -47,10 +56,6 @@ public class IngredientsFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        if (savedInstanceState != null) {
-            mIngredients = savedInstanceState.getParcelableArrayList(getString(R.string.ingredients));
-            mRecipeName = savedInstanceState.getString(getString(R.string.recipe));
-        }
         mIngredientsBinding.recipeNameTv.setText(mRecipeName);
         RecyclerView recyclerView = mIngredientsBinding.ingredientsRv;
         recyclerView.setHasFixedSize(true);

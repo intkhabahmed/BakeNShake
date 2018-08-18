@@ -32,6 +32,14 @@ public class StepsFragment extends Fragment {
         this.mSteps = steps;
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (savedInstanceState != null) {
+            mSteps = savedInstanceState.getParcelableArrayList(getString(R.string.steps));
+        }
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -42,9 +50,6 @@ public class StepsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        if (savedInstanceState != null) {
-            mSteps = savedInstanceState.getParcelableArrayList(getString(R.string.steps));
-        }
         final ViewPager stepsViewPager = mStepsBinding.stepsVp;
         StepsFragmentPagerAdapter stepsPagerAdapter = new StepsFragmentPagerAdapter(getChildFragmentManager(), mSteps);
         stepsViewPager.setAdapter(stepsPagerAdapter);
