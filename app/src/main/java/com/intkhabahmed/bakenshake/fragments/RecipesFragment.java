@@ -8,6 +8,8 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.VisibleForTesting;
+import android.support.test.espresso.IdlingResource;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -24,6 +26,7 @@ import com.intkhabahmed.bakenshake.models.RecipeResult;
 import com.intkhabahmed.bakenshake.services.RecipeService;
 import com.intkhabahmed.bakenshake.utils.AppConstants;
 import com.intkhabahmed.bakenshake.utils.Global;
+import com.intkhabahmed.bakenshake.utils.RecipeIdlingResource;
 import com.intkhabahmed.bakenshake.viewmodels.RecipeViewModel;
 
 import java.util.List;
@@ -33,6 +36,7 @@ public class RecipesFragment extends Fragment implements RecipeAdapter.ItemClick
     private FragmentMainBinding mMainBinding;
     private RecipeAdapter mRecipeAdapter;
     private boolean isTwoPaneLayout;
+    @Nullable private RecipeIdlingResource mIdlingResource;
 
     public RecipesFragment() {
     }
@@ -63,6 +67,9 @@ public class RecipesFragment extends Fragment implements RecipeAdapter.ItemClick
     }
 
     private void setupViewModel(final Bundle bundle) {
+        if (mIdlingResource != null) {
+            mIdlingResource.setIdleState(false);
+        }
         RecipeViewModel recipeViewModel = ViewModelProviders.of(this).get(RecipeViewModel.class);
         recipeViewModel.getRecipes().observe(this, new Observer<List<RecipeResult>>() {
             @Override
@@ -76,6 +83,9 @@ public class RecipesFragment extends Fragment implements RecipeAdapter.ItemClick
                         detailFragment.setArguments(getArguments());
                         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.secondary_fragment_container, detailFragment)
                                 .commit();
+                    }
+                    if (mIdlingResource != null) {
+                        mIdlingResource.setIdleState(true);
                     }
                 } else {
                     mRecipeAdapter.setRecipes(null);
@@ -124,5 +134,13 @@ public class RecipesFragment extends Fragment implements RecipeAdapter.ItemClick
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putBoolean(AppConstants.IS_TWO_PANE, isTwoPaneLayout);
+    }
+
+    @VisibleForTesting
+    public IdlingResource getIdlingResource() {
+        if (mIdlingResource == null) {
+            mIdlingResource = new RecipeIdlingResource();
+        }
+        return mIdlingResource;
     }
 }

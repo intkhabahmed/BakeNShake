@@ -13,34 +13,27 @@ import com.intkhabahmed.bakenshake.fragments.RecipesFragment;
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding mMainBinding;
-    private boolean isTwoPaneLayout;
-    private FragmentManager mFragmentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-        /*if (mFragmentManager.getBackStackEntryCount() > 0) {
-            mFragmentManager.get
-        }*/
         if (savedInstanceState == null) {
             setupUi();
         }
     }
 
     private void setupUi() {
-        mFragmentManager = getSupportFragmentManager();
+        FragmentManager mFragmentManager = getSupportFragmentManager();
         if (mMainBinding.secondaryFragmentContainer != null) {
-            isTwoPaneLayout = true;
             RecipesFragment recipesFragment = new RecipesFragment();
             Bundle bundle = new Bundle();
-            bundle.putBoolean(Intent.EXTRA_TEXT, isTwoPaneLayout);
+            bundle.putBoolean(Intent.EXTRA_TEXT, /*isTwoPaneLayout*/ true);
             recipesFragment.setArguments(bundle);
             mFragmentManager.beginTransaction().replace(mMainBinding.mainFragmentContainer.getId(), recipesFragment)
                     .commit();
 
         } else {
-            isTwoPaneLayout = false;
             mFragmentManager.beginTransaction().replace(mMainBinding.mainFragmentContainer.getId(), new RecipesFragment())
                     .commit();
         }
@@ -51,4 +44,6 @@ public class MainActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
         outState.putInt(Intent.EXTRA_TEXT, 1);
     }
+
+
 }
