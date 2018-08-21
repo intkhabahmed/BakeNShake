@@ -21,4 +21,5 @@ http://developer.android.com/guide/topics/appwidgets/index.html#CreatingLayout
     <dimen name="xlarge_icon_size">96dp</dimen>
     <dimen name="control_button_width">120dp</dimen>
     <dimen name="control_button_height">48dp</dimen>
+    <dimen name="small_icon_size">48dp</dimen>
 </resources>

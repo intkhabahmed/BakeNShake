@@ -1,17 +1,19 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@color/colorBackground</item>
     </style>
 
     <style name="DetailActivityTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@color/colorBackground</item>
     </style>
 
     <style name="CardItemStyle" parent="CardView">
@@ -22,6 +24,7 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_marginEnd">@dimen/medium_spacing</item>
         <item name="android:layout_marginStart">@dimen/medium_spacing</item>
+        <item name="cardBackgroundColor">@android:color/transparent</item>
     </style>
 
     <style name="ControlButtonStyle" parent="Base.Widget.AppCompat.Button">

@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 
 import com.intkhabahmed.bakenshake.R;
 import com.intkhabahmed.bakenshake.databinding.ActivityMainBinding;
@@ -18,12 +20,19 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        Toolbar toolbar = mMainBinding.toolbar;
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setTitle("");
+        }
         if (savedInstanceState == null) {
             setupUi();
         }
     }
 
     private void setupUi() {
+
         FragmentManager mFragmentManager = getSupportFragmentManager();
         if (mMainBinding.secondaryFragmentContainer != null) {
             RecipesFragment recipesFragment = new RecipesFragment();
