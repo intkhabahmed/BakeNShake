@@ -32,6 +32,7 @@
         <item name="android:layout_height">@dimen/control_button_height</item>
         <item name="android:background">@color/colorAccent</item>
         <item name="android:gravity">center</item>
+        <item name="android:layout_marginEnd">@dimen/large_spacing</item>
         <item name="android:layout_marginBottom">@dimen/xlarge_spacing</item>
         <item name="android:layout_marginStart">@dimen/large_spacing</item>
         <item name="android:textAppearance">@style/Base.TextAppearance.AppCompat.Headline</item>
