@@ -4,6 +4,7 @@ import android.content.res.Configuration;
 import android.databinding.DataBindingUtil;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -30,7 +31,6 @@ import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
 import com.intkhabahmed.bakenshake.R;
-import com.intkhabahmed.bakenshake.activities.DetailActivity;
 import com.intkhabahmed.bakenshake.databinding.StepItemBinding;
 import com.intkhabahmed.bakenshake.models.Step;
 
@@ -76,7 +76,7 @@ public class StepItemFragment extends Fragment {
                         mStepItemBinding.playerView.setDefaultArtwork(resource);
                     }
                 });
-                ((ImageView)view.findViewById(R.id.exo_artwork)).setScaleType(ImageView.ScaleType.FIT_CENTER);
+                ((ImageView) view.findViewById(R.id.exo_artwork)).setScaleType(ImageView.ScaleType.FIT_CENTER);
             }
             if (!TextUtils.isEmpty(mStep.getVideoUrl())) {
                 if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
@@ -86,9 +86,9 @@ public class StepItemFragment extends Fragment {
                 }
                 initializePlayer();
                 mStepItemBinding.playerView.setPlayer(player);
-                if(savedInstanceState != null && savedInstanceState.getLong(getString(R.string.player_current_position)) != 0) {
+                if (savedInstanceState != null && savedInstanceState.getLong(getString(R.string.player_current_position)) != 0) {
                     player.seekTo(savedInstanceState.getLong(getString(R.string.player_current_position)));
-                    player.setPlayWhenReady(true);
+                    player.setPlayWhenReady(savedInstanceState.getBoolean(getString(R.string.player_state)));
                 }
             } else {
                 mStepItemBinding.playerView.setVisibility(View.GONE);
@@ -107,7 +107,17 @@ public class StepItemFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        releasePlayer();
+        if (Build.VERSION.SDK_INT < 24) {
+            releasePlayer();
+        }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (Build.VERSION.SDK_INT >= 24) {
+            releasePlayer();
+        }
     }
 
     @Override
@@ -115,6 +125,7 @@ public class StepItemFragment extends Fragment {
         super.onSaveInstanceState(outState);
         if (player != null && player.getCurrentPosition() != 0) {
             outState.putLong(getString(R.string.player_current_position), player.getCurrentPosition());
+            outState.putBoolean(getString(R.string.player_state), player.getPlayWhenReady());
         }
         outState.putParcelable(getString(R.string.steps), mStep);
     }
@@ -127,10 +138,10 @@ public class StepItemFragment extends Fragment {
     }
 
     private void releasePlayer() {
-       if (player != null) {
-           player.stop();
-           player.release();
-       }
+        if (player != null) {
+            player.stop();
+            player.release();
+        }
     }
 
     private void initializePlayer() {

@@ -15,4 +15,5 @@
     <string name="default_last_opened_recipe_id">1</string>
     <string name="no_of_servings">Servings :</string>
     <string name="no_recipes">Sorry, No Recipes Available!</string>
+    <string name="player_state">Player state</string>
 </resources>

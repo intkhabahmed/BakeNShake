@@ -47,7 +47,7 @@ public class RecipeStepsTest {
     @Test
     public void testFragmentInstanceCreatedOrNot() {
         onView(withId(R.id.steps_cv)).perform(click());
-        onView(allOf(withId(R.id.description_tv), isCompletelyDisplayed())).check(matches(isDisplayed()));
+        onView(allOf(withId(R.id.next_step_tv), isCompletelyDisplayed())).check(matches(isDisplayed()));
     }
 
     @Test
